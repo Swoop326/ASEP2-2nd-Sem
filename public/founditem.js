@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.set('contact', `${countryCode}${contact}`); // Ensure country code is included
 
       try {
-        const response = await fetch('http://localhost:5500/api/submit-found-item', {
+        const response = await fetch('/api/submit-found-item', {
           method: 'POST',
           body: formData,
         });

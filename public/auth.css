@@ -1,0 +1,104 @@
+/* 🔹 Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* 🔹 Signup/Login Container */
+.auth-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* 🔹 Heading */
+h2 {
+  color: #4f46e5;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Labels */
+label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* 🔹 Input Fields */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✅ Input Focus Effect */
+input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 8px rgba(79, 70, 229, 0.3);
+  outline: none;
+}
+
+/* 🔹 Signup/Login Button */
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4f46e5, #3f3dbd);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✅ Button Hover Effect */
+button:hover {
+  background: linear-gradient(135deg, #3f3dbd, #2e2ba8);
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ Button Active Effect */
+button:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* 🔹 Links */
+p a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #3f3dbd;
+}
+
+/* 🔹 Mobile Responsiveness */
+@media (max-width: 480px) {
+  .auth-container {
+      padding: 30px;
+      width: 90%;
+  }
+
+  input, button {
+      font-size: 14px;
+  }
+}

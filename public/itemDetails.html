@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Item Details</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Your exact CSS as provided, unchanged */
+    /* Push page content below fixed navbar */
+    body {
+      padding-top: calc(80px + 20px); /* Adjust space automatically */
+    }
+
+    /* Navbar Styles */
+    nav {
+        background-color: #4f46e5;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around; /* Space buttons evenly */
+        align-items: center;
+        padding: 1rem 2rem;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+    }
+        
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    nav a:hover {
+        background-color: white;
+        color: #4f46e5;
+    }
+
+    .logo {
+        font-size: 1.6em;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 25px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        background-color: #6366f1;
+        color: #ffd700;
+    }
+
+    .nav-links a.active {
+        background-color: white;
+        color: #4f46e5;
+    }
+
+    .nav-toggle {
+        display: none;
+        font-size: 1.6em;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            background-color: #4f46e5;
+            width: 100%;
+            margin-top: 10px;
+            border-top: 1px solid #ffffff33;
+            padding: 10px 0;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-toggle {
+            display: block;
+        }
+    }
+
+    /* Global Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f0f2f5, #e0e7ff);
+        margin: 0;
+        padding: 0;
+        padding-top: 90px;
+    }
+
+    /* Centering container */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 20px;
+        min-height: 100vh;
+    }
+
+    /* Card styles */
+    .item-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .item-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .item-card h1 {
+        color: #222;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Image */
+    .item-image {
+        width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        border-radius: 12px;
+        margin: 0 auto 20px auto;
+        display: block;
+        border: 2px solid #dcdcdc;
+    }
+
+    /* Info section */
+    .item-info p {
+        margin: 10px 0;
+        color: #444;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* Button styling */
+    .claim-btn {
+        background: linear-gradient(135deg, #6c5ce7, #341f97);
+        color: white;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        margin: 30px auto 0;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .claim-btn:hover {
+        background: linear-gradient(135deg, #5a4db0, #2d1669);
+        transform: scale(1.05);
+    }
+
+    .claim-btn:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #4f46e5;
+        color: white;
+        padding: 10px 20px;
+        flex-wrap: wrap;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: #ffd700;
+    }
+
+    .nav-toggle {
+        display: none;
+        font-size: 1.5em;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-toggle {
+            display: block;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">Lost & Found</div>
+    <nav class="nav-links" id="navLinks">
+      <a href="homepage.html">Home</a>
+      <a href="reportlostitem.html">Report Lost</a>
+      <a href="reportfounditem.html">Report Found</a>
+      <a href="itemlisting.html">Items</a>
+      <!-- Removed "Details" link from navbar as requested -->
+    </nav>
+    <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <main class="container">
+    <div class="item-card">
+      <h1>🔍 Item Details</h1>
+      <img
+        src="images/default.jpg"
+        alt="Item Image"
+        class="item-image"
+        id="item-image"
+      />
+      <div class="item-info">
+        <p><strong>👜 Name:</strong> <span id="item-title">Loading...</span></p>
+        <p><strong>📂 Category:</strong> <span id="item-category">Loading...</span></p>
+        <p><strong>📅 Date:</strong> <span id="item-date">Loading...</span></p>
+        <p><strong>📍 Location:</strong> <span id="item-location">Loading...</span></p>
+        <p><strong>📝 Description:</strong> <span id="item-description">Loading...</span></p>
+        <p><strong>📧 Contact Email:</strong> <span id="item-contact">Loading...</span></p>
+      </div>
+      <button class="claim-btn" id="claim-btn" onclick="handleClaim()">🚀 Claim This Item</button>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+    }
+  </script>
+  <script src="itemDetails.js"></script>
+</body>
+</html>

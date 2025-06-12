@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost & Found</title>
+  <link rel="stylesheet" href="homepage.css" />
+  <script>
+    const userLoggedIn = sessionStorage.getItem("userLoggedIn");
+    if (!userLoggedIn) {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header-container">
+    <header class="header">
+      <div class="logo-container">
+        <img src="images/VIT.jpeg" alt="Lost & Found Logo" class="logo" />
+      </div>
+      <h1>Lost & Found</h1>
+      <p>Helping you recover lost items and return found treasures</p>
+    </header>
+  </div>
+
+  <!-- Main Content -->
+  <!-- Main Content -->
+<main class="main-content-wrapper single-column">
+  <section class="division">
+    <h2>Report Lost Item</h2>
+    <p>Let us help you find your lost belongings by reporting them here.</p>
+    <div class="button-container">
+      <a href="reportlostitem.html" class="btn btn-lost">Report Lost Item</a>
+    </div>
+  </section>
+
+  <section class="division">
+    <h2>Report Found Item</h2>
+    <p>Found something? Report it here to reconnect it with its owner.</p>
+    <div class="button-container">
+      <a href="reportfounditem.html" class="btn btn-found">Report Found Item</a>
+    </div>
+  </section>
+
+  <section class="division">
+    <h2>Browse All Items</h2>
+    <p>Explore all the items reported to find what you're looking for.</p>
+    <div class="button-container">
+      <a href="itemlisting.html" class="btn btn-browse">Browse All Items</a>
+    </div>
+  </section>
+</main>
+
+<a href="https://wa.me/14155238886?text=join%20touch-image" target="_blank" class="qr-home-link">
+  <div class="qr-card">
+    <h3>📱 Get WhatsApp Updates</h3>
+    <p>Scan this using lens before submitting:</p>
+    <img src="images/QR Code.png" alt="Join WhatsApp Sandbox">
+    <p style="margin-top: 10px;">or <span class="qr-link-text">click here</span> to join manually.</p>
+  </div>
+</a>
+
+
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 Lost & Found. All rights reserved.
+  </footer>
+
+  <!-- Logout Button -->
+  <button id="logout-btn" class="btn btn-logout">Log Out</button>
+
+  <script>
+    document.getElementById("logout-btn").addEventListener("click", function () {
+      sessionStorage.removeItem("userLoggedIn");
+      sessionStorage.removeItem("username");
+      window.location.href = "login.html";
+    });
+
+    // Shift left-section slightly to the left
+    window.addEventListener("DOMContentLoaded", () => {
+      const leftSection = document.querySelector(".left-section");
+      if (leftSection) {
+        leftSection.style.marginRight = "30px";
+        leftSection.style.transform = "translateX(-40px)";
+      }
+    });
+  </script>
+
+</body>
+</html>

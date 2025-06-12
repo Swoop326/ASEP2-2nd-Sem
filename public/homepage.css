@@ -1,0 +1,242 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8fc;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Header Container */
+.header-container {
+  background: linear-gradient(to right, #0052a3, #007bff);
+  padding: 50px 20px;
+  text-align: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #e6e6f2;
+  opacity: 0.9;
+}
+
+/* Logo Styling */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Main Content Layout with QR */
+.main-content-wrapper.single-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.main-content-wrapper .division {
+  width: 100%;
+}
+
+
+/* Left Section with Lost and Found */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Division Card */
+.division {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  animation: fadeIn 1s ease-in-out;
+  text-align: center;
+  flex: 1;
+  min-width: 280px;
+}
+
+.division h2 {
+  font-size: 1.9rem;
+  margin-bottom: 15px;
+  color: #0052a3;
+}
+
+.division p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Browse Section */
+.browse-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Buttons */
+.btn {
+  text-decoration: none;
+  padding: 14px 26px;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: scale(1);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-lost {
+  background-color: #0052a3;
+}
+
+.btn-lost:hover {
+  background-color: #003d80;
+}
+
+.btn-found {
+  background-color: #0052a3;
+}
+
+.btn-found:hover {
+  background-color: #003d80;
+}
+
+.btn-browse {
+  background-color: #0052a3;
+}
+
+.btn-browse:hover {
+  background-color: #003d80;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 40px;
+  padding: 20px;
+  animation: fadeIn 1.5s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Logout Button */
+#logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ff4c4c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+}
+
+#logout-btn:hover {
+  background-color: #d43f3f;
+}
+
+.qr-home-link {
+  text-decoration: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.qr-card {
+  background-color: white;
+  padding: 20px;
+  width: 240px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.qr-card:hover {
+  transform: scale(1.03);
+}
+
+.qr-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.qr-card p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 6px 0;
+}
+
+.qr-card img {
+  width: 160px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 6px;
+  background: #fdfdfd;
+  margin-top: 10px;
+}
+
+.qr-link-text {
+  color: #007bff;
+  text-decoration: underline;
+}
+

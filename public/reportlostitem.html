@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Report Lost Item</title>
+
+  <style>
+    :root {
+      --main-color: #0052a3;
+      --secondary-color: #007bff;
+      --hover-bg: #c7d2fe;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f8fc;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInBody 1s ease;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      width: 100%;
+      background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-buttons button {
+      background: white;
+      color: var(--main-color);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .nav-buttons button:hover {
+      background: var(--hover-bg);
+      color: #003f7f;
+    }
+
+    .container {
+      max-width: 1000px;
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      margin-top: 2rem;
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      animation: zoomIn 1s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="file"],
+    select,
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--secondary-color);
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    button[type="submit"] {
+      grid-column: span 2;
+      justify-self: center;
+      padding: 14px 40px;
+      background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.4s, transform 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(to right, #003d80, #005dc1);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      button[type="submit"], .full-width {
+        grid-column: span 1 !important;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+    .phone-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.phone-container select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <h1>Report a Lost Item</h1>
+  <div class="nav-buttons">
+    <button onclick="location.href='homepage.html'">Home</button>
+    <button onclick="location.href='reportfounditem.html'">Report Found Item</button>
+    <button onclick="location.href='itemlisting.html'">Browse Items</button>
+  </div>
+</header>
+
+<div class="container">
+  <h2>Report Lost Item</h2>
+  <form id="lostItemForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="title">Item Name</label>
+      <input type="text" id="title" name="title" required />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required />
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date Lost</label>
+      <input type="date" id="date" name="date" required />
+    </div>
+
+    <div class="form-group">
+      <label for="time">Time Lost</label>
+      <input type="time" id="time" name="time" required />
+    </div>
+
+    <div class="form-group">
+      <label for="contact">Contact Number</label>
+      <div class="phone-container">
+        <select id="countryCode" required>
+          <option value="+91" selected>🇮🇳 +91</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+81">🇯🇵 +81</option>
+        </select>
+        <input type="text" id="contact" pattern="\d{10}" maxlength="10" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Select</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Documents">Documents</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="reward">Reward Offered</label>
+      <input type="text" id="reward" name="reward" placeholder="Optional" />
+    </div>
+
+    <div class="form-group">
+      <label for="image">Upload Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required />
+    </div>
+
+    <div class="form-group full-width">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Report</button>
+  </form>
+</div>
+
+<script src="lostitem.js"></script>
+</body>
+</html>

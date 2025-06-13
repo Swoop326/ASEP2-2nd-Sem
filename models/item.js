@@ -35,14 +35,6 @@ const itemSchema = new mongoose.Schema({
     default: 'unclaimed'
   },
   reporter: {
-    name: {
-      type: String,
-      default: ''
-    },
-    prn: {
-      type: String,
-      default: ''
-    },
     contact: {
       type: String,
       default: ''
@@ -64,4 +56,4 @@ const itemSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.models.Item || mongoose.model('Item', itemSchema);
+module.exports = mongoose.model('Item', itemSchema);

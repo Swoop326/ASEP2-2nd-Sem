@@ -5,7 +5,7 @@ const FoundItem = require('../models/founditem');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const notifyAllUsers = require('../utils/notifyUsers'); // New import
+const sendEmailToAllUsers = require('../utils/sendEmail'); // <-- Updated import
 
 // ✅ Cloudinary config
 cloudinary.config({
@@ -44,15 +44,18 @@ router.post('/submit-found-item', upload.single('image'), async (req, res) => {
 
     await newItem.save();
 
-    // ✅ Broadcast WhatsApp to all users
-    await notifyAllUsers({
-      type: 'found',
-      title: itemName,
-      location,
-      date: dateFound || 'Today',
-      category,
-      imageUrl
-    });
+    // ✅ Send email to all users
+    const subject = `New Found Item Reported: ${itemName}`;
+    const htmlContent = `
+      <h2>${itemName}</h2>
+      <p><strong>Description:</strong> ${description}</p>
+      <p><strong>Category:</strong> ${category}</p>
+      <p><strong>Location:</strong> ${location}</p>
+      <p><strong>Date:</strong> ${dateFound || 'Today'}</p>
+      ${imageUrl ? `<img src="${imageUrl}" alt="Item Image" style="max-width:300px;" />` : ''}
+      <p>Please check the platform for more details.</p>
+    `;
+    await sendEmailToAllUsers(subject, htmlContent);
 
     res.status(201).json({ message: 'Found item reported successfully.' });
   } catch (err) {

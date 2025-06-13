@@ -5,7 +5,7 @@ const Item = require('../models/item');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const notifyAllUsers = require('../utils/notifyUsers'); // New import
+const sendEmailToAllUsers = require('../utils/sendEmail'); // <-- Updated import
 
 // ✅ Cloudinary config
 cloudinary.config({
@@ -27,6 +27,8 @@ const upload = multer({ storage });
 // ✅ POST /lost - Submit lost item
 router.post('/lost', upload.single('image'), async (req, res) => {
   try {
+    console.log('Received body:', req.body);
+
     const {
       title, description, category,
       location, date, time,
@@ -57,34 +59,23 @@ router.post('/lost', upload.single('image'), async (req, res) => {
 
     await newItem.save();
 
-    // ✅ Broadcast WhatsApp to all users
-    await notifyAllUsers({
-      type: 'lost',
-      title,
-      location,
-      date,
-      category,
-      imageUrl: req.file?.path || ''
-    });
+    // ✅ Send email to all users
+    const subject = `New Lost Item Reported: ${title}`;
+    const htmlContent = `
+      <h2>${title}</h2>
+      <p><strong>Description:</strong> ${description}</p>
+      <p><strong>Category:</strong> ${category}</p>
+      <p><strong>Location:</strong> ${location}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      ${req.file?.path ? `<img src="${req.file.path}" alt="Item Image" style="max-width:300px;" />` : ''}
+      <p>Please check the platform for more details.</p>
+    `;
+    await sendEmailToAllUsers(subject, htmlContent);
 
     res.status(201).json({ message: 'Lost item reported successfully' });
   } catch (err) {
     console.error('❌ Error reporting lost item:', err);
     res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// ✅ GET /lost/:id - Get details of a lost item
-router.get('/lost/:id', async (req, res) => {
-  try {
-    const item = await Item.findById(req.params.id);
-    if (!item || item.type !== 'lost') {
-      return res.status(404).json({ error: 'Lost item not found' });
-    }
-    res.json(item);
-  } catch (error) {
-    console.error('❌ Error fetching lost item:', error);
-    res.status(500).json({ error: 'Server error' });
   }
 });
 

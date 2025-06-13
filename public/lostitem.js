@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.set("contact", fullContact);
 
     try {
-      const response = await fetch("/api/lost", {
+      const response = await fetch("http://localhost:5500/api/lost", {
         method: "POST",
         body: formData
       });

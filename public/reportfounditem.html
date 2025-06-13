@@ -145,6 +145,69 @@
         gap: 10px;
       }
     }
+
+    @media (max-width: 600px) {
+  .form-container {
+    padding: 10px;
+    width: 99vw;
+    max-width: 100vw;
+    margin-top: 1rem;
+    border-radius: 7px;
+  }
+  .form-container h2 {
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+  }
+  .form-group {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .form-block {
+    margin-bottom: 14px;
+  }
+  input, select, textarea {
+    font-size: 0.98rem;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  .submit-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 20px;
+    margin: 10px 0 0 0;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 1rem 0.5rem;
+  }
+  .nav-buttons {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  .nav-buttons button {
+    padding: 7px 10px;
+    font-size: 0.98rem;
+    border-radius: 18px;
+  }
+  /* Make country code and phone input stack vertically */
+  .form-subgroup > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  select#countryCode {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+  }
+}
+
   </style>
 </head>
 <body>

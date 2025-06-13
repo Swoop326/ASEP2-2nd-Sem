@@ -240,3 +240,57 @@ body {
   text-decoration: underline;
 }
 
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+  .header p {
+    font-size: 1rem;
+  }
+  .main-content-wrapper.single-column {
+    gap: 16px;
+    width: 98%;
+    margin: 1rem auto;
+  }
+  .division {
+    padding: 12px;
+    border-radius: 12px;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .division h2 {
+    font-size: 1.2rem;
+  }
+  .btn {
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: 14px;
+  }
+  .qr-home-link {
+    position: static;
+    display: block;
+    margin: 18px auto 0 auto;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+  }
+  .qr-card {
+    width: 90vw;
+    max-width: 320px;
+    padding: 12px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .qr-card img {
+    width: 120px;
+    max-width: 80vw;
+  }
+  #logout-btn {
+    position: static;
+    margin: 12px auto;
+    display: block;
+    width: 90%;
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+}

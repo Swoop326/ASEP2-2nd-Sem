@@ -193,6 +193,72 @@
   background-color: #f9f9f9;
 }
 
+@media (max-width: 600px) {
+  .container {
+    max-width: 98vw;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+    padding: 10px;
+    margin-bottom: 18px;
+    border-radius: 7px;
+  }
+  form {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .form-group,
+  .full-width {
+    grid-column: span 1 !important;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  input[type="file"],
+  select,
+  textarea {
+    font-size: 0.98rem;
+    padding: 8px;
+    border-radius: 7px;
+  }
+  button[type="submit"] {
+    padding: 12px 0;
+    font-size: 1rem;
+    border-radius: 30px;
+    width: 100%;
+    grid-column: span 1;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 1rem 0.5rem;
+  }
+  .nav-buttons {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+  .nav-buttons button {
+    padding: 7px 10px;
+    font-size: 0.98rem;
+    border-radius: 18px;
+  }
+  .phone-container {
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+  .phone-container select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 7px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -238,7 +304,7 @@
           <option value="+61">🇦🇺 +61</option>
           <option value="+81">🇯🇵 +81</option>
         </select>
-        <input type="text" id="contact" pattern="\d{10}" maxlength="10" required />
+        <input type="text" id="contact" name = "contact" pattern="\d{10}" maxlength="10" required />
       </div>
     </div>
 

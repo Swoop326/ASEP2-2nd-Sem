@@ -1,43 +1,27 @@
-// utils/notifyUsers.js
-const twilio = require('twilio');
 const User = require('../models/User');
+const sendEmailToAllUsers = require('./sendEmail'); // Make sure this is the updated version
 
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-const twilioWhatsAppNumber = 'whatsapp:' + process.env.TWILIO_WHATSAPP_NUMBER;
-
-// ✅ Format number to WhatsApp format
-function formatPhoneNumber(phone) {
-  // Assume Indian numbers if not starting with '+'
-  if (!phone.startsWith('+')) {
-    return '+91' + phone;
-  }
-  return phone;
-}
-
-// ✅ Send WhatsApp to all users
+// ✅ Send Email to all users
 async function notifyAllUsers({ type, title, location, date, category, imageUrl }) {
-  const users = await User.find({});
-  const messageType = type === 'lost' ? '🛑 LOST Item Reported!' : '📢 FOUND Item Reported!';
-  const messageBody = `${messageType}
-🧾 Item: ${title}
-📍 Location: ${location}
-📅 Date: ${date}
-🔎 Category: ${category}`;
+  const users = await User.find({}, 'email');
+  const recipientList = users.map(user => user.email);
 
-  for (const user of users) {
-    const formattedNumber = formatPhoneNumber(user.phone);
-    try {
-      await client.messages.create({
-        from: twilioWhatsAppNumber,
-        to: `whatsapp:${formattedNumber}`,
-        body: messageBody,
-        ...(imageUrl ? { mediaUrl: [imageUrl] } : {})
-      });
-      console.log(`✅ Notification sent to ${formattedNumber}`);
-    } catch (err) {
-      console.error(`❌ Failed to send to ${formattedNumber}:`, err.message);
-    }
+  if (recipientList.length === 0) {
+    console.log('No users to send email to.');
+    return;
   }
+
+  const subject = `New ${type === 'lost' ? 'Lost' : 'Found'} Item Reported: ${title}`;
+  const htmlContent = `
+    <h2>${title}</h2>
+    <p><strong>Category:</strong> ${category}</p>
+    <p><strong>Location:</strong> ${location}</p>
+    <p><strong>Date:</strong> ${date}</p>
+    ${imageUrl ? `<img src="${imageUrl}" alt="Item Image" style="max-width:300px;" />` : ''}
+    <p>Please check the platform for more details.</p>
+  `;
+
+  await sendEmailToAllUsers(subject, htmlContent, recipientList);
 }
 
 module.exports = notifyAllUsers;

@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const endpoint = itemType === 'found'
-    ? `/api/found/${itemId}`
-    : `/api/lost/${itemId}`;
+    ? `http://localhost:5500/api/found/${itemId}`
+    : `http://localhost:5500/api/lost/${itemId}`;
 
   try {
     const response = await fetch(endpoint);

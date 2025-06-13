@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('claimsContainer');
 
   try {
-    const res = await fetch('/api/admin/all');
+    const res = await fetch('http://localhost:5500/api/admin/all');
     if (!res.ok) throw new Error('Failed to fetch claims.');
     const claims = await res.json();
 

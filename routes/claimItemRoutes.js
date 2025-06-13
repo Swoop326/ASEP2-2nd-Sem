@@ -6,6 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const Claim = require('../models/claim');
 const FoundItem = require('../models/founditem');
 const twilio = require('twilio');
+const sendEmail = require('../utils/sendEmail'); // <-- Import your email utility
 require('dotenv').config();
 
 // ✅ Twilio setup
@@ -76,7 +77,16 @@ router.post('/', upload.single('proofImage'), async (req, res) => {
 
     await newClaim.save();
 
-    // ✅ Send WhatsApp message to user
+    // ✅ Send email to only the claimant
+    const subject = `Claim Received for ${item.item || 'an item'}`;
+    const htmlContent = `
+      <h2>Hi ${fullName},</h2>
+      <p>Your claim for the item <strong>${item.item}</strong> has been received.</p>
+      <p>We will review your claim and contact you soon.</p>
+    `;
+    await sendEmail(subject, htmlContent, [email]);
+
+    // ✅ Try to send WhatsApp message to user, but don't fail if Twilio fails
     const messageBody = `
 Hello ${fullName}, your claim for the item "${item.item}" was received.
 📍 Lost at: ${lostPlace}
@@ -87,14 +97,20 @@ Hello ${fullName}, your claim for the item "${item.item}" was received.
 Please verify this info at the Student Section (Ground Floor, Building 1).
 - Lost & Found Team`;
 
-    await client.messages.create({
-      from: twilioWhatsAppNumber,
-      to: phone.startsWith('whatsapp:') ? phone : `whatsapp:${phone.startsWith('+') ? phone : '+91' + phone}`,
-      body: messageBody,
-      mediaUrl: [proofImage],
-    });
-
-    return res.status(200).json({ message: 'Claim submitted and WhatsApp message sent.' });
+    try {
+      await client.messages.create({
+        from: twilioWhatsAppNumber,
+        to: phone.startsWith('whatsapp:') ? phone : `whatsapp:${phone.startsWith('+') ? phone : '+91' + phone}`,
+        body: messageBody,
+        mediaUrl: [proofImage],
+      });
+      // WhatsApp sent successfully
+      return res.status(200).json({ message: 'Claim submitted. WhatsApp and email sent.' });
+    } catch (twilioErr) {
+      // WhatsApp failed, but claim and email succeeded
+      console.error('❌ Twilio error:', twilioErr);
+      return res.status(200).json({ message: 'Claim submitted. Email sent, but WhatsApp message could not be sent.' });
+    }
 
   } catch (err) {
     console.error('❌ Error submitting claim:', err);

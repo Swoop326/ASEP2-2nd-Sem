@@ -79,4 +79,28 @@ router.post('/lost', upload.single('image'), async (req, res) => {
   }
 });
 
+// ✅ GET /lost/:id - Get details of a lost item
+router.get('/lost/:id', async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    if (!item || item.type !== 'lost') {
+      return res.status(404).json({ error: 'Lost item not found' });
+    }
+    res.json({
+      _id: item._id,
+      title: item.title,
+      description: item.description,
+      category: item.category,
+      location: item.location,
+      date: item.date,
+      type: item.type,
+      imageUrl: item.imageUrl,
+      ownerContact: item.reporter?.contact || ''
+    });
+  } catch (error) {
+    console.error('❌ Error fetching lost item:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

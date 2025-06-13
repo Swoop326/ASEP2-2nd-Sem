@@ -77,11 +77,21 @@ router.post('/', upload.single('proofImage'), async (req, res) => {
 
     await newClaim.save();
 
-    // ✅ Send email to only the claimant
+    // ✅ Send email to only the claimant with all details and proof image
     const subject = `Claim Received for ${item.item || 'an item'}`;
     const htmlContent = `
       <h2>Hi ${fullName},</h2>
-      <p>Your claim for the item <strong>${item.item}</strong> has been received.</p>
+      <p>Your claim for the item <strong>${item.item}</strong> has been received. Here are the details you submitted:</p>
+      <ul>
+        <li><strong>Full Name:</strong> ${fullName}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Phone:</strong> ${phone}</li>
+        <li><strong>Lost Place:</strong> ${lostPlace}</li>
+        <li><strong>Lost Date:</strong> ${new Date(lostDate).toLocaleDateString()}</li>
+        <li><strong>Proof Text:</strong> ${proofText}</li>
+        <li><strong>Unique Info:</strong> ${uniqueInfo}</li>
+      </ul>
+      ${proofImage ? `<p><strong>Proof Image:</strong><br><img src="${proofImage}" alt="Proof Image" style="max-width:300px;" /></p>` : ''}
       <p>We will review your claim and contact you soon.</p>
     `;
     await sendEmail(subject, htmlContent, [email]);
